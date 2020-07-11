@@ -22,7 +22,17 @@ endDate.addEventListener("change",function(e){
 })
 
 function startClock(d){
-    console.log(timeLeft(d));    
+    let tl = timeLeft(d);
+    
+    for(let pro in tl){
+        console.log(pro,tl[pro]);
+        
+        let el = document.querySelector("."+pro)
+        console.log(el);
+
+        if(el){el.innerHTML = tl[pro]}
+        
+    }
     
 }
 
