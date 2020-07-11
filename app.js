@@ -12,12 +12,20 @@ const clock = document.querySelector(".clock");
 let timeInterval;
 let timeStop = true;
 
+const savedValue = localStorage.getItem("countdown") ||false;
+if(savedValue){
+    startClock(savedValue);
+    let inputValue=new Date(savedValue);
+    endDate.valueAsDate=inputValue;
+}
+
 endDate.addEventListener("change",function(e){
     e.preventDefault();
     clearInterval(timeInterval);
     
     const temp = new Date(this.value);
     console.log(temp);
+    localStorage.setItem("countdown",temp)
 
     startClock(temp);
     timeStop=false;
