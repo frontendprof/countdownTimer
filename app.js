@@ -9,30 +9,48 @@ const clock = document.querySelector(".clock");
 
 // Adding event listener
 
+let timeInterval;
+let timeStop = true;
+
 endDate.addEventListener("change",function(e){
     e.preventDefault();
-    // console.log(this.value);
+    clearInterval(timeInterval);
     
     const temp = new Date(this.value);
     console.log(temp);
 
     startClock(temp);
+    timeStop=false;
     
     
 })
 
 function startClock(d){
-    let tl = timeLeft(d);
-    
-    for(let pro in tl){
-        console.log(pro,tl[pro]);
-        
-        let el = document.querySelector("."+pro)
-        console.log(el);
 
-        if(el){el.innerHTML = tl[pro]}
+    function updateCounter(){
+
+        let tl = timeLeft(d);
+
+        if(tl.total<=0){timeStop=false;}
+    
+        for(let pro in tl){
+              
+            let el = document.querySelector("."+pro)
         
+
+            if(el){el.innerHTML = tl[pro]}
+        
+        }
+
     }
+
+    updateCounter();
+    if(timeStop){
+        timeInterval=setInterval(updateCounter,1000);
+    }else{
+        clearInterval(timeInterval);
+    }
+    
     
 }
 
