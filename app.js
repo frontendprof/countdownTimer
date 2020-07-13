@@ -24,7 +24,6 @@ endDate.addEventListener("change",function(e){
     clearInterval(timeInterval);
     
     const temp = new Date(this.value);
-    console.log(temp);
     localStorage.setItem("countdown",temp)
 
     startClock(temp);
